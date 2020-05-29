@@ -67,10 +67,10 @@
 
 .header{
 
-    width: 100vw;
+    width: 100%;
     z-index: 10;
     padding:3rem 0rem 0rem 0rem;
-    max-width: 55rem;
+    
     
     display: flex;
     align-items: center;
@@ -94,6 +94,7 @@ ion-icon{
     text-align: center;
     color: var(--color-grey-3);
     font-size: 1.7rem;
+    width: 100%;
 }
 
 .predictbox{
