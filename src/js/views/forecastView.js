@@ -1,13 +1,13 @@
-import {elements} from './elements';
+import { elements } from "./elements";
 
-export const renderForecast = (el)=>{
-    const markup = `
+export const renderForecast = (el) => {
+  const markup = `
         <div class="predictbox">
             <div class="predictbox__title">${el.date}</div>
 
             <div class="predictbox__details">
 
-                <img src="./img/weather/${el.icon}.svg" alt="Weather Forecast" class="predictbox__weather">
+                <img src="./assets/weather/${el.icon}.svg" alt="Weather Forecast" class="predictbox__weather">
 
                 <div class="predictbox__info">
                     <div class="predictbox__info--type">${el.name}</div>
@@ -18,10 +18,10 @@ export const renderForecast = (el)=>{
 
             </div> 
         </div>`;
-    elements.predictWrapper.insertAdjacentHTML('beforeend',markup);
-}
+  elements.predictWrapper.insertAdjacentHTML("beforeend", markup);
+};
 
-export const renderHeader = ()=>{
-    const header = `<div class="futureforecast">Forecast for the next 5 days</div>`;
-    elements.predictWrapper.insertAdjacentHTML('beforeend',header);
-}
+export const renderHeader = () => {
+  const header = `<div class="futureforecast">Forecast for the next 5 days</div>`;
+  elements.predictWrapper.insertAdjacentHTML("beforeend", header);
+};

@@ -12,7 +12,7 @@ export default class Forecast {
     const proxy = "https://cors-anywhere.herokuapp.com/";
 
     const res = await Axios(
-      "https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/forecast?lat=35&lon=139&appid=7bd5bb1cc6103a243b490396fbced847"
+      `https://crossoriginrequests.herokuapp.com/https://api.openweathermap.org/data/2.5/forecast?lat=${this.lat}&lon=${this.long}&appid=7bd5bb1cc6103a243b490396fbced847`
     )
       .then((res) => {
         this.data = res.data.list.map((el) => ({

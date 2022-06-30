@@ -1,10 +1,10 @@
-import {elements} from './elements';
+import { elements } from "./elements";
 
-export const renderCurrent = location =>{
-    const markup = `
+export const renderCurrent = (location) => {
+  const markup = `
             <h2 class="weatherbox__testhead">${location.name}</h2>
             <div class="weatherbox__details">
-                <img src="./img/weather/${location.icon}.svg" alt="Weather" class="weatherbox__details--icon">
+                <img src="./assets/weather/${location.icon}.svg" alt="Weather" class="weatherbox__details--icon">
                 <div class="weatherbox__details--temp">${location.temp} &deg;C</div>
             </div>
 
@@ -16,10 +16,10 @@ export const renderCurrent = location =>{
             </div>
     `;
 
-    elements.weatherBox.insertAdjacentHTML("beforeend",markup);
-}
+  elements.weatherBox.insertAdjacentHTML("beforeend", markup);
+};
 
-export const clearUI = () =>{
-    elements.predictWrapper.innerHTML = '';
-    elements.weatherBox.innerHTML = '';
-}
+export const clearUI = () => {
+  elements.predictWrapper.innerHTML = "";
+  elements.weatherBox.innerHTML = "";
+};

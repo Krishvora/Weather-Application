@@ -18,12 +18,10 @@ const globalController = async () => {
   state.current = new Current();
   // Get Geolocation Coordinnates
   await state.current.getCoords();
-  console.log(state);
   // Check if geolocation worked
   if (state.current.error !== true) {
     // Initialise Forecast lat and long from Current
     state.forecast = new Forecast(state.current.coords.lat, state.current.coords.long);
-    console.log(state);
     //Get Weather based on user lat and long
     await state.current.getWeatherData();
     await state.forecast.getForecast();
