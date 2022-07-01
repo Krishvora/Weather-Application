@@ -29,7 +29,7 @@ export default class Current {
       })
       .catch((error) => {
         this.error = true;
-        alert("Geolocation " + error);
+        alert("Please enable the browser to access your location." + error);
       });
   }
 
