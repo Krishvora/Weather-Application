@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: ["babel-polyfill", "./src/index.js"],
   plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html",
@@ -24,6 +24,13 @@ module.exports = {
         test: /\.s[ac]ss$/,
         exclude: /node_modules/,
         use: ["style-loader", "css-loader", "sass-loader"],
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
       },
     ],
   },
