@@ -8,7 +8,7 @@
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development --open"
   },
-  "author": "fidalgo",
+  "author": "Krish Vora",
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
