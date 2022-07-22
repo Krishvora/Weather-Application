@@ -2,4 +2,3 @@ node_modules
 .env
 .firebaserc
 firebase.json
-.github
