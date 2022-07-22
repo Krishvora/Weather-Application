@@ -1,31 +1,46 @@
-import Axios from "axios";
-import moment from "moment";
+import axios from 'axios';
+import moment from 'moment';
 
 export default class Forecast {
-  constructor(lat, long) {
-    this.lat = lat;
-    this.long = long;
+  constructor(current, data) {
+    this.name = current.name;
+    this.currentWeather = current;
+    this.data = data;
   }
 
   async getForecast() {
-    const key = "7bd5bb1cc6103a243b490396fbced847";
-    const proxy = "https://cors-anywhere.herokuapp.com/";
+    let query;
+    if (this.data.length === 1) {
+      query = `${
+        process.env.PROXY
+      }api.openweathermap.org/data/2.5/forecast?id=${
+        this.data[0]
+      }&units=metric&appid=${process.env.APIKEY}`;
+    } else {
+      query = `${
+        process.env.PROXY
+      }api.openweathermap.org/data/2.5/forecast?lat=${this.data[0]}&lon=${
+        this.data[1]
+      }&units=metric&appid=${process.env.APIKEY}`;
+    }
+    try {
+      const res = await axios.get(`${process.env.PROXY}${query}`);
 
-    const res = await Axios(
-      `https://crossoriginrequests.herokuapp.com/https://api.openweathermap.org/data/2.5/forecast?lat=${this.lat}&lon=${this.long}&appid=7bd5bb1cc6103a243b490396fbced847`
-    )
-      .then((res) => {
-        this.data = res.data.list.map((el) => ({
-          date: moment.unix(el.dt).utc().format("dddd, Do MMMM, HH:mm"),
-          temp: Math.round(el.main.temp - 273.15),
-          temp_max: Math.round(el.main.temp_max - 273.15),
-          temp_min: Math.round(el.main.temp_min - 273.15),
-          name: el.weather[0].main,
-          icon: el.weather[0].icon,
-        }));
-      })
-      .catch((error) => {
-        console.log("Forecast " + error);
-      });
+      // Get only 1 result for each day since API returns data each 3 hours for 5 days
+      // Not the most elegant way here
+      this.weather = res.data.list.map(el => ({
+        date: moment
+          .unix(el.dt)
+          .utc()
+          .format('dddd, Do MMMM, HH:mm'),
+        temp: Math.round(el.main.temp),
+        temp_max: Math.round(el.main.temp_max),
+        temp_min: Math.round(el.main.temp_min),
+        name: el.weather[0].main,
+        icon: el.weather[0].icon,
+      }));
+    } catch (err) {
+      console.log(err);
+    }
   }
 }

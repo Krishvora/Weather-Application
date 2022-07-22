@@ -1,36 +1,46 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
+const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
 
 module.exports = {
-  entry: ["babel-polyfill", "./src/index.js"],
-  plugins: [
-    new HtmlWebpackPlugin({
-      filename: "index.html",
-      template: "./src/index.html",
-    }),
-  ],
+  entry: ["@babel/polyfill", "./src/js/app.js"],
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "js/bundle.js",
+  },
   devServer: {
     static: "./dist",
     liveReload: true,
     hot: false,
   },
-  output: {
-    filename: "index.bundle.js",
-    path: path.resolve(__dirname, "dist"),
-  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: "./src/index.html",
+    }),
+    new Dotenv(),
+    new MomentLocalesPlugin(),
+  ],
   module: {
     rules: [
       {
-        test: /\.s[ac]ss$/,
-        exclude: /node_modules/,
-        use: ["style-loader", "css-loader", "sass-loader"],
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
         use: {
           loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+          },
         },
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          "style-loader", // creates style nodes from JS strings
+          "css-loader", // translates CSS into CommonJS
+          "sass-loader", // compiles Sass to CSS, using Node Sass by default
+        ],
       },
     ],
   },
