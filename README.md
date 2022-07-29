@@ -1,5 +1,7 @@
 # Weather-Application
 
+### [Live Demo](https://weather-application-dce1e.web.app/)
+
 ### Description
 - Built an MVC-based Babel/JavaScript web application that gets the user’s current location and fetches the weather from the Open Weather Map API.
 - Integrated weather search functionality for 10,000 cities and utilized local storage for persistent storage of data.
